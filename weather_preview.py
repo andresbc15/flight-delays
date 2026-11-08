@@ -8,7 +8,7 @@ airport = airports[airports["iata_code"] == "JFK"].iloc[0]
 url = (
     "https://archive-api.open-meteo.com/v1/archive"
     f"?latitude={airport['latitude_deg']}&longitude={airport['longitude_deg']}"
-    "&start_date=2024-01-08&end_date=2024-01-08"
+    "&start_date=2025-01-01&end_date=2025-01-01"
     "&hourly=temperature_2m,precipitation,snowfall,wind_speed_10m,cloud_cover,weather_code"
     "&timezone=auto&format=csv"
 )
@@ -17,7 +17,6 @@ weather = pd.read_csv(url, skiprows=3)  # first 3 lines are location info
 
 # Transformations needed for joins later on
 weather["time"] = pd.to_datetime(weather["time"])
-weather.insert(0, "airport_iata", airport["iata_code"])
 
 print(weather.dtypes)  # schema: column names + data types
 print(weather.head().to_string())  # first 5 rows
