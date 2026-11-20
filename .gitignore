@@ -1,1 +1,3 @@
-*.venv
+# Environments and secrets
+.venv/
+.env
